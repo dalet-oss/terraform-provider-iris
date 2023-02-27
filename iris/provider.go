@@ -40,7 +40,7 @@ func Provider() terraform.ResourceProvider {
 				Type:         schema.TypeString,
 				Required:     true,
 				DefaultFunc:  schema.EnvDefaultFunc("IRIS_URI", nil),
-				ValidateFunc: validation.IsURLWithHTTPS,
+				ValidateFunc: validation.IsURLWithHTTPorHTTPS,
 				Description:  "Iris platform URI",
 			},
 			KeyIrisProviderToken: {

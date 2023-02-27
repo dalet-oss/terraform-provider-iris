@@ -12,8 +12,8 @@ const (
 	KeyMAC = "mac"
 	// KeyIP corresponds to the associated resource schema key
 	KeyIP = "ipaddr"
-	// KeyName corresponds to the associated resource schema key
-	KeyName = "hostname"
+	// KeyHostname corresponds to the associated resource schema key
+	KeyHostname = "hostname"
 )
 
 func resourceIrisDHCPReservation() *schema.Resource {
@@ -42,7 +42,7 @@ func resourceIrisDHCPReservation() *schema.Resource {
 				Required:     true,
 				ValidateFunc: validation.IsIPAddress,
 			},
-			KeyName: {
+			KeyHostname: {
 				Type:         schema.TypeString,
 				Optional:     true,
 				ValidateFunc: validation.All(validation.StringIsNotEmpty, validation.StringIsNotWhiteSpace),

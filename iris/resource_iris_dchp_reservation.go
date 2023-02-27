@@ -9,14 +9,14 @@ import (
 )
 
 const (
-	// KeySubnet corresponds to the associated resource schema key
-	KeySubnet = "subnet"
-	// KeyMAC corresponds to the associated resource schema key
-	KeyMAC = "mac"
-	// KeyIP corresponds to the associated resource schema key
-	KeyIP = "ipaddr"
 	// KeyHostname corresponds to the associated resource schema key
 	KeyHostname = "hostname"
+	// KeyIP corresponds to the associated resource schema key
+	KeyIP = "ipaddr"
+	// KeyMAC corresponds to the associated resource schema key
+	KeyMAC = "mac"
+	// KeySubnet corresponds to the associated resource schema key
+	KeySubnet = "subnet"
 )
 
 func resourceIrisDHCPReservation() *schema.Resource {
@@ -30,24 +30,24 @@ func resourceIrisDHCPReservation() *schema.Resource {
 		},
 
 		Schema: map[string]*schema.Schema{
-			KeySubnet: {
+			KeyHostname: {
 				Type:         schema.TypeString,
-				Required:     true,
+				Optional:     true,
 				ValidateFunc: validation.All(validation.StringIsNotEmpty, validation.StringIsNotWhiteSpace),
-			},
-			KeyMAC: {
-				Type:         schema.TypeString,
-				Required:     true,
-				ValidateFunc: validation.IsMACAddress,
 			},
 			KeyIP: {
 				Type:         schema.TypeString,
 				Required:     true,
 				ValidateFunc: validation.IsIPAddress,
 			},
-			KeyHostname: {
+			KeyMAC: {
 				Type:         schema.TypeString,
-				Optional:     true,
+				Required:     true,
+				ValidateFunc: validation.IsMACAddress,
+			},
+			KeySubnet: {
+				Type:         schema.TypeString,
+				Required:     true,
 				ValidateFunc: validation.All(validation.StringIsNotEmpty, validation.StringIsNotWhiteSpace),
 			},
 		},

@@ -8,6 +8,14 @@ M = $(shell printf "\033[34;1m▶\033[0m")
 .PHONY: all
 all: mod fmt lint vet $(BIN) ; @
 
+.PHONY: get-sdk
+get-sdk:
+	$Q rm -rf models sdk
+	$Q cp -rf ../iris-daemon/models .
+	$Q cp -rf ../iris-daemon/pkg/iris/sdk .
+	$Q find sdk -name "*.go" -exec sed -i "s%bitbucket.org/ooyalaflex/iris-daemon/models%github.com/dalet-oss/terraform-provider-iris/models%g" {} +
+	$Q find sdk -name "*.go" -exec sed -i "s%bitbucket.org/ooyalaflex/iris-daemon/pkg/iris/sdk%github.com/dalet-oss/terraform-provider-iris/sdk%g" {} +
+
 .PHONY: mod
 mod: ; $(info $(M) collecting modules…) @
 	$Q go mod download

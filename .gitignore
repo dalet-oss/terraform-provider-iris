@@ -1,3 +1,5 @@
 terraform-provider-iris
 sample.tf
 terraform.tfstate*
+.terraform
+.terraform.lock.hcl

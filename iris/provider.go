@@ -43,6 +43,7 @@ func Provider() terraform.ResourceProvider {
 		},
 
 		ResourcesMap: map[string]*schema.Resource{
+			"iris_dhcp_subnet":      resourceIrisDHCPSubnet(),
 			"iris_dhcp_reservation": resourceIrisDHCPReservation(),
 		},
 

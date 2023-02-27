@@ -39,8 +39,18 @@ provider "iris" {
 ### Resource configuration
 
 ```hcl
+resource "iris_dhcp_subnet" "subnet1" {
+  cidr      = "192.168.0.0/24"
+  pools     = [
+    {
+     first  = "192.16.8.0.10"
+     last   = "192.168.0.50"
+    }
+  ]
+}
+
 resource "iris_dhcp_reservation" "dhcp1" {
-  subnet    = "subnetId"
+  subnet    = iris_dhcp_subnet.subnet1.id
   mac       = "00:11:22:33:44:55"
   ipaddr    = "192.168.0.100"
   hostname  = "my_hostname"

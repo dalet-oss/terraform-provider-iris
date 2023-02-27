@@ -33,6 +33,10 @@ lint: ; $(info $(M) running linter…) @
 vet: ; $(info $(M) running vetter…) @
 	$Q go vet ./iris .
 
+.PHONY: doc
+doc: ; $(info $(M) generating documentation…) @
+	$Q go generate ./...
+
 .PHONY: $(BIN)
 $(BIN): ; $(info $(M) building terraform provider plugin…) @
 	$Q go build -ldflags "${LDFLAGS}"

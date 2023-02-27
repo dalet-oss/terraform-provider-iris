@@ -41,12 +41,14 @@ provider "iris" {
 ```hcl
 resource "iris_dhcp_subnet" "subnet1" {
   cidr      = "192.168.0.0/24"
-  pools     = [
-    {
-     first  = "192.16.8.0.10"
-     last   = "192.168.0.50"
-    }
-  ]
+  pool {
+     first  = "192.168.0.10"
+     last   = "192.168.0.20"
+  }
+  pool {
+     first  = "192.168.0.30"
+     last   = "192.168.0.40"
+  }
 }
 
 resource "iris_dhcp_reservation" "dhcp1" {

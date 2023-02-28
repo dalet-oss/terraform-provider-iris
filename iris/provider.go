@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"sync"
 
-	"github.com/dalet-oss/terraform-provider-iris/sdk"
+	"github.com/dalet-oss/iris-api/client"
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
@@ -27,7 +27,7 @@ const (
 
 // ProviderConfiguration struct for iris-provider
 type ProviderConfiguration struct {
-	Iris  *sdk.Iris
+	Iris  *client.Iris
 	Mutex *sync.Mutex
 	Cond  *sync.Cond
 }
@@ -61,7 +61,7 @@ func Provider() terraform.ResourceProvider {
 	}
 }
 
-func newIrisClient(uri, token string) (*sdk.Iris, error) {
+func newIrisClient(uri, token string) (*client.Iris, error) {
 	if uri == "" || token == "" {
 		return nil, fmt.Errorf("The Iris provider needs proper initialization parameters")
 	}
@@ -71,7 +71,7 @@ func newIrisClient(uri, token string) (*sdk.Iris, error) {
 		return nil, err
 	}
 
-	r := httptransport.New(u.Host, sdk.DefaultBasePath, []string{u.Scheme})
+	r := httptransport.New(u.Host, client.DefaultBasePath, []string{u.Scheme})
 	r.SetDebug(false)
 	r.Consumers[MimeJSON] = runtime.JSONConsumer()
 	r.Producers[MimeJSON] = runtime.JSONProducer()
@@ -80,7 +80,7 @@ func newIrisClient(uri, token string) (*sdk.Iris, error) {
 	}
 	r.DefaultAuthentication = httptransport.Compose(auths...)
 
-	return sdk.New(r, strfmt.Default), nil
+	return client.New(r, strfmt.Default), nil
 }
 
 func providerConfigure(d *schema.ResourceData) (interface{}, error) {

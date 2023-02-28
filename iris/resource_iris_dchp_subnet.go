@@ -4,8 +4,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/validation"
 
-	"github.com/dalet-oss/terraform-provider-iris/models"
-	"github.com/dalet-oss/terraform-provider-iris/sdk/dhcp"
+	"github.com/dalet-oss/iris-api/client/dhcp"
+	"github.com/dalet-oss/iris-api/models"
 )
 
 const (

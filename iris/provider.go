@@ -55,6 +55,8 @@ func Provider() terraform.ResourceProvider {
 		ResourcesMap: map[string]*schema.Resource{
 			"iris_dhcp_subnet":      resourceIrisDHCPSubnet(),
 			"iris_dhcp_reservation": resourceIrisDHCPReservation(),
+			"iris_dns_zone":         resourceIrisDNSZone(),
+			"iris_dns_record":       resourceIrisDNSRecord(),
 		},
 
 		ConfigureFunc: providerConfigure,

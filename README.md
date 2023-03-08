@@ -57,6 +57,27 @@ resource "iris_dhcp_reservation" "dhcp1" {
   ipaddr    = "192.168.0.100"
   hostname  = "my_hostname"
 }
+
+resource "iris_dns_zone" "zone1" {
+  name      = "iris.example.net."
+}
+
+resource "iris_dns_record" "record1" {
+  zone      = iris_dns_zone.zone1.id
+  record    = "www"
+  type      = "A"
+  ttl       = 1800
+  values    = ["192.168.0.1", "192.168.0.2", "192.168.0.3"]
+}
+
+resource "iris_dns_record" "record_mx" {
+  zone      = iris_dns_zone.zone1.id
+  record    = "smtp"
+  type      = "MX"
+  ttl       = 3600
+  values    = ["10 mail.example.net", "20 mail2.example.net"]
+}
+
 ```
 ## Authors
 

@@ -56,6 +56,7 @@ resource "iris_dhcp_reservation" "dhcp1" {
   mac       = "00:11:22:33:44:55"
   ipaddr    = "192.168.0.100"
   hostname  = "my_hostname"
+  domain    = "acme.com"
 }
 
 resource "iris_dns_zone" "zone1" {

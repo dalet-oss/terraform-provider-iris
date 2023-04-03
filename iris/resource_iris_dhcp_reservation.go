@@ -9,6 +9,8 @@ import (
 )
 
 const (
+	// KeyDomain corresponds to the associated resource schema key
+	KeyDomain = "domain"
 	// KeyHostname corresponds to the associated resource schema key
 	KeyHostname = "hostname"
 	// KeyIP corresponds to the associated resource schema key
@@ -30,6 +32,11 @@ func resourceIrisDHCPReservation() *schema.Resource {
 		},
 
 		Schema: map[string]*schema.Schema{
+			KeyDomain: {
+				Type:         schema.TypeString,
+				Optional:     true,
+				ValidateFunc: validation.All(validation.StringIsNotEmpty, validation.StringIsNotWhiteSpace),
+			},
 			KeyHostname: {
 				Type:         schema.TypeString,
 				Optional:     true,
@@ -56,6 +63,7 @@ func resourceIrisDHCPReservation() *schema.Resource {
 
 func newReservation(d *schema.ResourceData) models.Reservation {
 	res := models.Reservation{
+		Domain:   d.Get(KeyDomain).(string),
 		Hostname: d.Get(KeyHostname).(string),
 		IP:       d.Get(KeyIP).(string),
 		Mac:      d.Get(KeyMAC).(string),
@@ -66,6 +74,7 @@ func newReservation(d *schema.ResourceData) models.Reservation {
 
 func reservationToResource(r *models.Reservation, d *schema.ResourceData) {
 	// set object params
+	d.Set(KeyDomain, r.Domain)
 	d.Set(KeyHostname, r.Hostname)
 	d.Set(KeyIP, r.IP)
 	d.Set(KeyMAC, r.Mac)
